@@ -1,6 +1,9 @@
 body{
     background-color:black;
 }
+form{
+    margin-top:-20px;
+}
 #newBusiness{
     background-color: #d7f8ff;
     width:600px;
@@ -8,11 +11,8 @@ body{
 }
 h2{
     text-align: center;
-    color: rgb(90, 4, 4);
+    color: rgb(189, 25, 25);
     padding-top: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    animation: type 8s steps(60, end); 
 }
 div{
     padding:0.5rem;
@@ -48,7 +48,8 @@ th,td{
     background-color: white;
 }
 .table-data{
-    padding-top: 50px;
+    padding-top: 0px;
+    padding-bottom: 430px;
 overflow-x: scroll;
 }
 #list{
@@ -91,6 +92,37 @@ select[multiple]{
   }
   
   #submitButton:hover {
+    background: #3cfc49;
+    background-image: -webkit-linear-gradient(top, #3cfc49, #d934d3);
+    background-image: -moz-linear-gradient(top, #3cfc49, #d934d3);
+    background-image: -ms-linear-gradient(top, #3cfc49, #d934d3);
+    background-image: -o-linear-gradient(top, #3cfc49, #d934d3);
+    background-image: linear-gradient(to bottom, #3cfc49, #d934d3);
+    text-decoration: none;
+  }
+  .tableSubmit {
+    margin-left: 220px;
+    background: #d934d9;
+    background-image: -webkit-linear-gradient(top, #d934d9, #47b82b);
+    background-image: -moz-linear-gradient(top, #d934d9, #47b82b);
+    background-image: -ms-linear-gradient(top, #d934d9, #47b82b);
+    background-image: -o-linear-gradient(top, #d934d9, #47b82b);
+    background-image: linear-gradient(to bottom, #d934d9, #47b82b);
+    -webkit-border-radius: 60;
+    -moz-border-radius: 60;
+    border-radius: 60px;
+    font-family: Courier New;
+    color: #f0de13;
+    font-size: 22px;
+    padding: 10px 20px 10px 20px;
+    border: solid #cb22d4 3px;
+    text-decoration: none;
+    /* margin-top: 20px;
+    margin-bottom: 50px; */
+    margin-left: -15px;
+  }
+  
+  .tableSubmit:hover {
     background: #3cfc49;
     background-image: -webkit-linear-gradient(top, #3cfc49, #d934d3);
     background-image: -moz-linear-gradient(top, #3cfc49, #d934d3);

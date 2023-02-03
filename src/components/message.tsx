@@ -1,10 +1,11 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
-
-
+import { type } from "./const";
+import { Link } from "react-router-dom"
+import TablePage from "./table";
 const Signup = () => {
-  const [merchantList, setMerchantList] = useState<any>();
+  
+  const [merchantList, setMerchantList] = useState<type[]>();
   const [button, setButton] = useState("submit");
   const [formValues, setFormValues] = useState({
     userName: "",
@@ -20,13 +21,11 @@ const Signup = () => {
     notesInput: "",
   });
 
- 
-
   const getAllMerchants = async () => {
     const getAllDataResponse = await axios?.get(
       "http://localhost:5000/getAllMerchants"
     );
-    
+
     setMerchantList(getAllDataResponse?.data);
     return;
   };
@@ -34,10 +33,8 @@ const Signup = () => {
   useEffect(() => {
     getAllMerchants();
   }, []);
- 
 
-  const getMerchantById = async (id:number) => {
-
+  const getMerchantById = async (id: number) => {
     const getEditDataResponse = await axios.put(
       `http://localhost:5000/getMerchant/${id}`,
       { id: id }
@@ -49,7 +46,7 @@ const Signup = () => {
     return;
   };
 
-  const updateMerchant = async (id:number) => {
+  const updateMerchant = async (id: number) => {
     console.log("id", id);
     const updateDataResponse = await axios.put(
       "http://localhost:5000/updateMerchant",
@@ -58,9 +55,9 @@ const Signup = () => {
 
     console.log("updatedata", updateDataResponse);
 
-    setMerchantList((previousMerchantsData:any) => {
+    setMerchantList((previousMerchantsData: any) => {
       const updatedResponse = previousMerchantsData.filter(
-        (merchant:any) => merchant?.id !== id
+        (merchant: any) => merchant?.id !== id
       );
       return [...updatedResponse, updateDataResponse?.data];
     });
@@ -68,15 +65,15 @@ const Signup = () => {
     return;
   };
 
-  const deleteMerchant = async (id:number) => {
+  const deleteMerchant = async (id: number) => {
     const deleteDataResponse = await axios.delete(
       `http://localhost:5000/deleteMerchant/${id}`
     );
-   
+
     setMerchantList(deleteDataResponse?.data);
     return;
   };
-  
+
   const createMerchant = async () => {
     try {
       const createMerchantResponse = await axios.post(
@@ -84,9 +81,8 @@ const Signup = () => {
         { formValues }
       );
       console.log(createMerchantResponse?.data);
-   
-      setMerchantList((previousMerchantsData:any) => {
-    
+
+      setMerchantList((previousMerchantsData: any) => {
         return [...previousMerchantsData, createMerchantResponse?.data];
       });
       return;
@@ -95,25 +91,21 @@ const Signup = () => {
     }
   };
 
-//   const handleChange=()=>{
-//     setMerchantList({
-//                 ...merchantList
-//     })
-//   }
+  //   const handleChange=()=>{
+  //     setMerchantList({
+  //                 ...merchantList
+  //     })
+  //   }
 
-  const handleClick = async (event:any) => {
+  const handleClick = async (event: any) => {
     event.preventDefault();
 
-    
     if (button === "submit") {
       createMerchant();
     } else if (button === "update") {
-        
-      let idData = JSON.parse(localStorage.getItem("details")|| "");
+      let idData = JSON.parse(localStorage.getItem("details") || "");
       updateMerchant(idData);
     }
-
-   
 
     let resetForm = {
       userName: "",
@@ -131,10 +123,10 @@ const Signup = () => {
     setFormValues(resetForm);
   };
 
-
-
   return (
     <>
+    <Link to="/create" className="tableSubmit">Table</Link>
+    
       <form onSubmit={handleClick} id="newBusiness">
         <h2>
           <em>New Business </em>
@@ -191,7 +183,6 @@ const Signup = () => {
                   number: e.target.value,
                 };
               });
-             
             }}
             id="phoneNumber"
             minLength={5}
@@ -274,8 +265,6 @@ const Signup = () => {
               }}
               id="smallBusiness"
               name="Business"
-
-         
             />
             <label htmlFor="smallBusiness">Small Business </label>
             <br></br>
@@ -290,7 +279,6 @@ const Signup = () => {
               }}
               id="enterprise"
               name="Business"
-              
             />
             <label htmlFor="enterprise">Enterprise</label>
             <br></br>
@@ -305,7 +293,6 @@ const Signup = () => {
               }}
               id="entrepreneur"
               name="Business"
-            
             />
             <label htmlFor="entrepreneur">Entrepreneur</label>
           </label>
@@ -315,21 +302,11 @@ const Signup = () => {
           <label htmlFor="catogory" className="catogoryy">
             Catogory<br></br>
             <select id="catogory" multiple size={5}>
-              <option value="toys">
-                Toys
-              </option>
-              <option value="clothes">
-                Clothes
-              </option>
-              <option value="groceries">
-                groceries
-              </option>
-              <option value="Electronics">
-                Electronics
-              </option>
-              <option value="Digital">
-                Digital
-              </option>
+              <option value="toys">Toys</option>
+              <option value="clothes">Clothes</option>
+              <option value="groceries">groceries</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Digital">Digital</option>
             </select>
           </label>
         </div>
@@ -373,60 +350,57 @@ const Signup = () => {
         </div>
 
         <div>
-          <label
-           
-            className={"payments"}
-          >
+          <label className={"payments"}>
             Payment Option<br></br>
             <input
-             value={formValues.payments}
-             onChange={(e) => {
-               setFormValues((prev) => {
-                 return {
-                   ...prev,
-                   payments: e.target.value,
-                 };
-               });
-             }}
+              value={formValues.payments}
+              onChange={(e) => {
+                setFormValues((prev) => {
+                  return {
+                    ...prev,
+                    payments: e.target.id,
+                  };
+                });
+              }}
               type="checkbox"
               name="payment"
-            //   value="Cash on delivery"
+              //   value="Cash on delivery"
               id="cashOnDelivery"
               placeholder="cash on delivery"
             />
             <label htmlFor="cashOnDelivery">Cash on delivery</label>
             <br></br>
             <input
-            value={formValues.payments}
-            onChange={(e) => {
-              setFormValues((prev) => {
-                return {
-                  ...prev,
-                  payments: e.target.value,
-                };
-              });
-            }}
+              value={formValues.payments}
+              onChange={(e) => {
+                setFormValues((prev) => {
+                  return {
+                    ...prev,
+                    payments: e.target.id,
+                  };
+                });
+              }}
               type="checkbox"
               name="payment"
-            //   value="UPI"
+              //   value="UPI"
               id="UPI"
               placeholder="payment"
             />
             <label htmlFor="UPI">UPI</label>
             <br></br>
             <input
-            value={formValues.payments}
-            onChange={(e) => {
-              setFormValues((prev) => {
-                return {
-                  ...prev,
-                  payments: e.target.value,
-                };
-              });
-            }}
+              value={formValues.payments}
+              onChange={(e) => {
+                setFormValues((prev) => {
+                  return {
+                    ...prev,
+                    payments: e.target.id,
+                  };
+                });
+              }}
               type="checkbox"
               name="payment"
-            //   value="card payment"
+              //   value="card payment"
               id="cardPayment"
               placeholder="cardPayment"
             />
@@ -465,64 +439,8 @@ const Signup = () => {
           </button>
         </div>
       </form>
-       <div className="table-data">
-       <table id="list">
-         <thead>
-           <tr>
-             <th>userName</th>
-             <th>email</th>
-             <th>phoneNumber</th>
-             <th>contactName</th>
-             <th>contactEmail</th>
-             <th>contactPhoneNumber</th>
-             <th>type</th>
-             <th>percent</th>
-             <th>activefrom</th>
-             <th>payments</th>
-             <th>Notes</th>
-             <th>Edit</th>
-             <th>Delete</th>
-           </tr>
-         </thead>
-         <tbody className="tableData">
-           {merchantList?.map((merchant:any, index:number) => (
-             <tr key={merchant?.id + index}>
-               <td>{merchant?.userName}</td>
-               <td>{merchant?.email}</td>
-               <td>{merchant?.number}</td>
-               <td>{merchant?.contactName}</td>
-               <td>{merchant?.contactEmail}</td>
-               <td>{merchant?.contactPhoneNumber}</td>
-               <td>{merchant?.type}</td>
-               <td>{merchant?.percent}</td>
-               <td>{merchant?.dateInput}</td>
-               <td>{merchant?.payments}</td>
-               <td>{merchant?.notesInput}</td>
-               <td>
-                 <button
-                   type="submit"
-                   id="editButton"
-                   // onClick={getMerchantById}
-                   onClick={() => getMerchantById(merchant?.id)}
-                 >
-                   Edit
-                 </button>
-               </td>
-               <td>
-                 <button
-                   type="submit"
-                   id="deleteButton"
-                   onClick={() => deleteMerchant(merchant?.id)}
-                 >
-                   Delete
-                 </button>
-               </td>
-             </tr>
-           ))}
-         </tbody>
-       </table>
-     </div>
-   </>
-  )
-}
-  export default Signup
+      
+    </>
+  );
+};
+export default Signup;
