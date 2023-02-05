@@ -1,5 +1,7 @@
 import { type } from "./const"
 import { useState,useEffect } from "react";
+import { Link } from "react-router-dom"
+import './table.css'
 import axios from "axios";
 const TablePage=()=>{
   const [merchantList, setMerchantList] = useState<type[]>();
@@ -88,7 +90,8 @@ const TablePage=()=>{
     }
   };
   return(
-    <>
+    <div className="bodyTable">
+    <Link to="/create" className="">Create</Link>
   <div className="table-data">
   <table id="list">
     <thead>
@@ -123,14 +126,15 @@ const TablePage=()=>{
           <td>{merchant?.payments}</td>
           <td>{merchant?.notesInput}</td>
           <td>
-            <button
+            {/* <button
               type="submit"
               id="editButton"
               // onClick={getMerchantById}
-              onClick={() => getMerchantById(merchant?.id)}
+              
             >
               Edit
-            </button>
+            </button> */}
+            <Link to="/create" onClick={() => getMerchantById(merchant?.id)} className="EditButton">Edit</Link>
           </td>
           <td>
             <button
@@ -146,7 +150,7 @@ const TablePage=()=>{
     </tbody>
   </table>
 </div>
-</>
+</div>
   )
 }
 export default TablePage

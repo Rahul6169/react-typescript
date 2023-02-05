@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { type } from "./const";
-import { Link } from "react-router-dom"
-import TablePage from "./table";
+import './message.css'
+
+
 const Signup = () => {
   
   const [merchantList, setMerchantList] = useState<type[]>();
@@ -125,7 +126,7 @@ const Signup = () => {
 
   return (
     <>
-    <Link to="/create" className="tableSubmit">Table</Link>
+    
     
       <form onSubmit={handleClick} id="newBusiness">
         <h2>

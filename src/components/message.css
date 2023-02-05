@@ -43,19 +43,7 @@ textarea{
     
 }
 
-th,td{
-    padding: 20px;
-    background-color: white;
-}
-.table-data{
-    padding-top: 0px;
-    padding-bottom: 430px;
-overflow-x: scroll;
-}
-#list{
-    background-color:gray;
-    color:black;
-}
+
 input[type=radio]{
     margin-left: 200px;
 }

@@ -1,0 +1,18 @@
+.bodyTable{
+    background-color:white;
+    height: 100%;
+    width:100%
+}
+th,td{
+    padding: 20px;
+    background-color: black;
+}
+.table-data{
+    margin-top: 0px;
+    /* padding-bottom: 430px; */
+overflow-x: scroll;
+}
+#list{
+    background-color:gray;
+    color:white;
+}
